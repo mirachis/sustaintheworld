@@ -1,0 +1,330 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 161px);
+    grid-template-rows: repeat(3, 161px);
+    gap: 50px;
+    position: relative; /* Ana konteyneri göreli konumda tut */
+}
+
+.button {
+    white-space: normal;
+    position: relative;
+    width: 161px;
+    height: 161px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; /* Taşan içeriği gizle */
+}
+
+
+
+.button1 {background-color: #E5243B; background-image: url('../images/E-WEB-Goal-01.png'); }
+        .button2 {background-color: #DDA63A; background-image: url('../images/E-WEB-Goal-02.png'); }
+        .button3 {background-color: #4C9F38; background-image: url('../images/E-WEB-Goal-03.png'); }
+        .button4 {background-color: #C5192D; background-image: url('../images/E-WEB-Goal-04.png'); }
+        .button5 {background-color: #FF3A21; background-image: url('../images/E-WEB-Goal-05.png'); }
+        .button6 {background-color: #26BDE2; background-image: url('../images/E-WEB-Goal-06.png'); }
+        .button7 {background-color: #FCC30B; background-image: url('../images/E-WEB-Goal-07.png'); }
+        .button8 {background-color: #A21942; background-image: url('../images/E-WEB-Goal-08.png'); }
+        .button9 {background-color: #FD6925; background-image: url('../images/E-WEB-Goal-09.png'); }
+        .button10 {background-color: #DD1367; background-image: url('../images/E-WEB-Goal-10.png'); }
+        .button11 {background-color: #FD9D24; background-image: url('../images/E-WEB-Goal-11.png'); }
+        .button12 {background-color: #BF8B2E; background-image: url('../images/E-WEB-Goal-12.png'); }
+        .button13 {background-color: #3F7E44; background-image: url('../images/E-WEB-Goal-13.png'); }
+        .button14 {background-color: #0A97D9; background-image: url('../images/E-WEB-Goal-14.png'); }
+        .button15 {background-color: #56C02B; background-image: url('../images/E-WEB-Goal-15.png'); }
+        .button16 {background-color: #00689D; background-image: url('../images/E-WEB-Goal-16.png'); }
+        .button17 {background-color: #19486A; background-image: url('../images/E-WEB-Goal-17.png'); }
+        .button18 {background-color: #F1F1F1; background-image: url('../images/logo.jpg'); }
+
+
+.button.active {
+    margin: auto;
+    top: 20%;
+       left: 20%;
+            transform: translate(-50%, -50%) scale(2); /* 2 kat büyütme */
+            width: 161px; /* Butonun boyutu korunur */
+            height: 161px;
+            background-image: none; /* Arka plan resmini kaldır */
+ }
+        
+.button .content {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Yazı tipi değiştir */
+    font-size: 16px; /* Yazı boyutunu artır */
+    color: #fff; /* Yazı rengini beyaz yap */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Yazıya gölge ekle */
+}
+.button.active .content {
+    white-space: normal;
+    position: absolute;
+    top:50%;
+    left:7%;
+    display: block; 
+    opacity: 1; /* Aktif durumda görünürlük */
+    text-align: center;
+}
+        
+.button:hover {
+    transform: scale(1.075);
+    width: 320px; /* Sağ tarafa doğru genişleyecek */
+    background-image: none; /* Hover durumunda da resmi kaldır */
+}
+        
+.button.active .content {white-space: normal;
+    position: absolute;
+    top:50%;
+    left:7%;
+    display: block; 
+    z-index: 10000;/* İçerik göster */
+    text-align: center;
+}
+
+.button:hover {
+    transform: scale(1.075);
+    width: 320px; /* Sağ tarafa doğru genişleyecek */
+    background-image: none; /* Hover durumunda da resmi kaldır */
+}
+
+.button:hover .content {white-space: normal;
+    position: absolute;
+    top:50%;
+    left:7%;
+    opacity: 1;
+    z-index: 10000; /* Buton üzerine gelindiğinde görünür olacak */
+    text-align: center;
+}
+
+.content {white-space: normal;
+    position: absolute;
+    top:50%;
+    left:7%;
+    display: block; /*  /* İçerik ortalanmış olsun */
+}
+
+.close-button {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    color: #000000;
+    width: 3px;
+    height: 3px;
+    z-index: 12;
+}
+
+.button.active .close-button {
+    display: block; 
+}
+
+.popup {
+    position: fixed;
+    top: 20px; /* Üstten konumlandırma */
+    width: 580px; /* Pop-up genişliği (yeni değer) */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Üstte görünmesi için */
+    color: white; /* Yazı rengi */
+    text-align: center;
+    animation: popUpAnimation 0.3s ease forwards; /* Animasyonu uygula */
+}
+
+@keyframes popDownAnimation {
+    from {
+        opacity: 1; /* Tam görünür */
+        transform: translateY(0); /* Normal konumda */
+    }
+    to {
+        opacity: 0; /* Görünmez */
+        transform: translateY(-20px); /* Yukarıya hareket */
+    }
+}
+
+
+
+.close-popup {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    color: white; /* Kapatma butonu rengi */
+}
+
+.menu-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 35px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.menu-button div {
+    background-color: rgb(255, 255, 255);
+    height: 4px;
+    border-radius: 2px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Başlangıçta ekranın dışında */
+    width: 250px; /* Kategoriler menüsünün genişliği */
+    height: 100vh; /* Tam sayfa yüksekliği */
+    background-color: white;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: transform 0.4s ease; /* Geçiş animasyonu */
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-container.active {
+    transform: translateX(250px); /* Görünür hale getir */
+}
+
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+.menu-container p {
+    font-size: 1.5em;
+    margin-bottom: 20px; /* Başlığın altındaki boşluk artırıldı */
+}
+
+.menu-container ul {
+    list-style: none; /* Noktaları kaldır */
+    padding: 30px; /* İç boşluk kaldır */
+}
+
+.menu-container li {
+    margin: 30px 0; /* Her bir maddeye dikey boşluk artırıldı */
+}
+
+
+.menu-container a {
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    color: #007BFF; /* Bağlantı rengi */
+    padding: 8px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-container a:hover {
+    background-color: #f0f0f0; /* Hover rengi */
+    color: #0056b3; /* Hover durumu için bağlantı rengi */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Butonları sar */
+    justify-content: center; /* Butonları ortala */
+    padding: 20px;
+}
+
+.button {
+    position: relative;
+    width: 161px;
+    height: 161px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, background-color 0.3s ease, width 0.3s ease;
+    overflow: hidden;
+}
+
+.button:hover {
+    transform: scale(1.075);
+    width: 320px; /* Sağ tarafa doğru genişleyecek */
+}
+
+.button .content {
+    position: absolute;
+    top: 50%;
+    left: 170px; /* Butonun dışına taşacak şekilde ayarlandı */
+    transform: translateY(-50%);
+    white-space: nowrap; /* Metin taşması */
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Görünürlük animasyonu */
+}
+
+.button:hover .content {
+    opacity: 1; /* Buton üzerine gelindiğinde görünür olacak */
+}
+
+
+
+#video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#videoIcerik {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+
+}
+
+
+#svg-container {
+    width: 800px;
+    margin: auto;
+}
+
+#video-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#continents-svg {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+svg path {
+    cursor: pointer;
+    fill: #4CAF50; /* Default color for continents */
+    stroke: #333;
+    stroke-width: 1;
+}
+
+svg path:hover {
+    fill: #FFC107; /* Hover effect */
+}
