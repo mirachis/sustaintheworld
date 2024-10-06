@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takımımız</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .images {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .team-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            flex: 2;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .menu-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 35px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+        
+        .menu-button div {
+            background-color: rgb(0, 0, 0);
+            height: 4px;
+            border-radius: 2px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .menu-container {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Başlangıçta ekranın dışında */
+            width: 250px; /* Kategoriler menüsünün genişliği */
+            height: 100vh; /* Tam sayfa yüksekliği */
+            background-color: white;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 0.4s ease; /* Geçiş animasyonu */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-container.active {
+            transform: translateX(250px); /* Görünür hale getir */
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+        }
+        
+        .menu-container p {
+            font-size: 1.5em;
+            margin-bottom: 20px; /* Başlığın altındaki boşluk artırıldı */
+        }
+        
+        .menu-container ul {
+            list-style: none; /* Noktaları kaldır */
+            padding: 30px; /* İç boşluk kaldır */
+        }
+        
+        .menu-container li {
+            margin: 30px 0; /* Her bir maddeye dikey boşluk artırıldı */
+        }
+        
+        
+        .menu-container a {
+            text-decoration: none; /* Alt çizgiyi kaldır */
+            color: #007BFF; /* Bağlantı rengi */
+            padding: 8px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .menu-container a:hover {
+            background-color: #f0f0f0; /* Hover rengi */
+            color: #0056b3; /* Hover durumu için bağlantı rengi */
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="menu-button" id="menu-button">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <div class="menu-container" id="menu-container">
+        <span class="close-menu" id="close-menu">&times;</span> <!-- Close button -->
+        <p><strong></strong></p>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/worldmap">Explore the World</a></li>
+            <li><a href="/play">Play Our Game</a></li>
+            <li><a href="/oworld">Our World at 2000s-2020s</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="images">
+            <img src="static/images/team.jpg" alt="Takım Üyesi 1" class="team-image">
+            <img src="static/images/team1.jpg" alt="Takım Üyesi 2" class="team-image">
+        </div>
+        <div class="description">
+            <h2>Takımımız Hakkında</h2>
+            <p>
+                Takımımız, farklı alanlardan gelen yetenekli bireylerden oluşmaktadır. 
+                Her bir takım üyesi, proje geliştirme sürecinde kendi uzmanlık alanıyla katkıda bulunmaktadır.
+                Amacımız, yenilikçi çözümler üreterek hedeflerimize ulaşmaktır.
+            </p>
+        </div>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('.button');
+let popupCount = 0; // Açılan pop-up sayısını takip etmek için
+
+const menuButton = document.getElementById('menu-button');
+const menuContainer = document.getElementById('menu-container');
+const closeMenu = document.getElementById('close-menu');
+
+menuButton.addEventListener('click', () => {
+    menuContainer.classList.toggle('active');
+});
+
+closeMenu.addEventListener('click', () => {
+    menuContainer.classList.remove('active'); // Kapatmak için 'active' class'ını kaldır
+});
+    </script>
+</body>
+</html>

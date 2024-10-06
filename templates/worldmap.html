@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Map with NASA GIBS Data</title>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 80vh;
+      width: 100vw;
+      z-index:50;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin: 10px;
+      z-index: 100;
+    }
+    button, input[type="date"] {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      background: linear-gradient(45deg, #000000, #ffffff);
+      color: white;
+    }
+    button:hover {
+      background: linear-gradient(45deg, #000000, #ffffff);
+      transform: translateY(-2px) scale(1.05);
+    }
+    input[type="date"] {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      width: 150px;
+      z-index: 100;
+    }
+    .menu-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 35px;
+      height: 25px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 200; /* Menü butonu için daha yüksek z-index */
+    }
+
+    .menu-button div {
+      background-color: black;
+      height: 4px;
+      border-radius: 2px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-container {
+      position: fixed;
+      top: 0;
+      left: -250px; /* Başlangıçta ekranın dışında */
+      width: 250px; /* Kategoriler menüsünün genişliği */
+      height: 100vh; /* Tam sayfa yüksekliği */
+      background-color: white;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 150; /* Menü konteyneri için z-index */
+      padding: 20px;
+      box-sizing: border-box;
+      transition: transform 0.4s ease; /* Geçiş animasyonu */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-container.active {
+      transform: translateX(250px); /* Görünür hale getir */
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: black;
+    }
+
+    .menu-container p {
+      font-size: 1.5em;
+      margin-bottom: 20px; /* Başlığın altındaki boşluk artırıldı */
+    }
+
+    .menu-container ul {
+      list-style: none; /* Noktaları kaldır */
+      padding: 30px; /* İç boşluk kaldır */
+    }
+
+    .menu-container li {
+      margin: 30px 0; /* Her bir maddeye dikey boşluk artırıldı */
+    }
+
+    .menu-container a {
+      text-decoration: none; /* Alt çizgiyi kaldır */
+      color: #007BFF; /* Bağlantı rengi */
+      padding: 8px 10px;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .menu-container a:hover {
+      background-color: #f0f0f0; /* Hover rengi */
+      color: #0056b3; /* Hover durumu için bağlantı rengi */
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap; /* Butonları sar */
+      justify-content: center; /* Butonları ortala */
+      padding: 20px;
+    }
+
+    .button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(45deg, #007BFF, #0056b3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      background: linear-gradient(45deg, #0056b3, #003f7f);
+      transform: translateY(-2px) scale(1.05);
+    }
+  </style>
+</head>
+<body>
+    <div class="menu-button" id="menu-button">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <div class="menu-container" id="menu-container">
+        <span class="close-menu" id="close-menu">&times;</span> <!-- Close button -->
+        <p><strong></strong></p>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/worldmap">Explore the World</a></li>
+            <li><a href="/play">Play Our Game</a></li>
+            <li><a href="/oworld">Our World at 2000s-2020s</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+  
+    <div class="controls">
+      <button onclick="changeLayer('TrueColor')">True Color</button>
+      <button onclick="changeLayer('NDVI')">Vegetation (NDVI)</button>
+      <button onclick="changeLayer('SoilMoisture')">Soil - Moisture</button>
+      <button onclick="changeLayer('Aerosol')">Aerosol Optical Depth</button>
+      <button onclick="changeLayer('SurfaceTemp')">Surface Temperature</button>
+      <button onclick="changeLayer('SnowCover')">Snow Cover</button>
+      <input type="date" id="datePicker" value="2024-09-01" onchange="updateDate()" />
+    </div>
+  
+    <div id="map"></div>
+  
+  <script>
+    let map = L.map('map').setView([0, 0], 2);
+
+    // Başlangıçta True Color katmanını ekle
+    let gibsLayer = L.tileLayer('https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.jpg', {
+      tileMatrixSet: '250m',
+      time: '2024-09-01',
+      tileSize: 256,
+      bounds: [[-90, -180], [90, 180]],
+      minZoom: 1,
+      maxZoom: 7,
+      attribution: 'NASA Worldview'
+    });
+
+    gibsLayer.addTo(map);
+
+    // Haritadaki katmanı değiştirme fonksiyonu
+    function changeLayer(layer) {
+      let layerUrl = '';
+      switch(layer) {
+        case 'TrueColor':
+          layerUrl = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.jpg';
+          break;
+        case 'NDVI':
+          layerUrl = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_NDVI_16Day/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.jpg';
+          break;
+        case 'SoilMoisture':
+          layerUrl = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_Soil_Moisture_8Day/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.png';
+          break;
+        case 'Aerosol':
+          layerUrl = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_Aerosol_Optical_Depth/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.png';
+          break;
+        case 'SurfaceTemp':
+          layerUrl = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_Surface_Temperature_8Day/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.png';
+          break;
+        case 'SnowCover':
+          layerUrl = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_Snow_Cover_8Day/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.png';
+          break;
+      }
+      gibsLayer.remove();
+      gibsLayer = L.tileLayer(layerUrl, {
+        tileMatrixSet: '250m',
+        time: document.getElementById('datePicker').value,
+        tileSize: 256,
+        bounds: [[-90, -180], [90, 180]],
+        minZoom: 1,
+        maxZoom: 7,
+        attribution: 'NASA Worldview'
+      }).addTo(map);
+    }
+
+    // Tarih güncellenince katmanı yeniden yükle
+    function updateDate() {
+      changeLayer(gibsLayer._url);
+    }
+
+    // Menü açma kapama
+    const menuButton = document.getElementById('menu-button');
+    const menuContainer = document.getElementById('menu-container');
+    const closeMenu = document.getElementById('close-menu');
+
+    menuButton.addEventListener('click', function() {
+      menuContainer.classList.toggle('active');
+    });
+
+    closeMenu.addEventListener('click', function() {
+      menuContainer.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

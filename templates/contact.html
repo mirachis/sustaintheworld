@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Substain the World!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <video autoplay muted loop id="video" onclick="durBasla()">
+
+        <source src="/static/images/stw.mp4" type="video/mp4">
+    
+    </video>
+
+    <div class="menu-button" id="menu-button">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <div class="menu-container" id="menu-container">
+        <span class="close-menu" id="close-menu">&times;</span> <!-- Close button -->
+        <p><strong></strong></p>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/worldmap">Explore the World</a></li>
+            <li><a href="/play">Play Our Game</a></li>
+            <li><a href="/oworld">Our World at 2000s-2020s</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

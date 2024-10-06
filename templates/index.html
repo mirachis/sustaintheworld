@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Substain the World!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <video autoplay muted loop id="video" onclick="durBasla()">
+
+        <source src="/static/images/stw.mp4" type="video/mp4">
+    
+    </video>
+
+    <div class="menu-button" id="menu-button">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <div class="menu-container" id="menu-container">
+        <span class="close-menu" id="close-menu">&times;</span> <!-- Close button -->
+        <p><strong></strong></p>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/worldmap">Explore the World</a></li>
+            <li><a href="/play">Play Our Game</a></li>
+            <li><a href="/oworld">Our World at 2000s-2020s</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+    
+    <div class="container" id="button-container">
+        <button class="button button1" data-text="This goal aims to end all forms of poverty everywhere. It focuses on creating social protection systems and economic opportunities, especially for the most vulnerable groups, including children and women, to help them escape poverty."><span class="content">This goal aims to end all forms of poverty everywhere. It focuses on creating social protection systems and economic opportunities, especially for the most vulnerable groups, including children and women, to help them escape poverty.        </span></button>
+        <button class="button button2" data-text="The goal of ending hunger, ensuring food security, and promoting sustainable agriculture is at the core of this target. It seeks to improve agricultural productivity, facilitate access to nutritious food, and support small-scale farmers. "><span class="content">The goal of ending hunger, ensuring food security, and promoting sustainable agriculture is at the core of this target. It seeks to improve agricultural productivity, facilitate access to nutritious food, and support small-scale farmers.        </span></button>
+        <button class="button button3" data-text="This goal focuses on increasing access to healthcare services, promoting preventive health measures, and combating infectious diseases to ensure healthy lives at all ages. Mental health and well-being are also key elements of this goal. "><span class="content">This goal focuses on increasing access to healthcare services, promoting preventive health measures, and combating infectious diseases to ensure healthy lives at all ages. Mental health and well-being are also key elements of this goal.</span></button>
+        <button class="button button4" data-text="The aim is to ensure inclusive and equitable quality education and promote lifelong learning opportunities for all. It emphasizes strengthening education systems, investing in teacher training, and ensuring access to education for all individuals. "><span class="content">The aim is to ensure inclusive and equitable quality education and promote lifelong learning opportunities for all. It emphasizes strengthening education systems, investing in teacher training, and ensuring access to education for all individuals.        </span></button>
+        <button class="button button5" data-text="This goal aims to achieve gender equality and empower women. It focuses on ensuring women’s equal opportunities in economic, political, and social fields, establishing protection mechanisms against violence, and prioritizing women’s health. "><span class="content">This goal aims to achieve gender equality and empower women. It focuses on ensuring women’s equal opportunities in economic, political, and social fields, establishing protection mechanisms against violence, and prioritizing women’s health.        </span></button>
+        <button class="button button6" data-text="The goal is to ensure that every individual has access to clean water and sanitation. It focuses on water resource management, water conservation, and improving hygiene conditions. Access to clean water is critical for a healthy life. "><span class="content">The goal is to ensure that every individual has access to clean water and sanitation. It focuses on water resource management, water conservation, and improving hygiene conditions. Access to clean water is critical for a healthy life.        </span></button>
+        <button class="button button7" data-text="This goal aims to ensure that everyone has access to affordable, reliable, sustainable, and modern energy. It emphasizes increasing the use of renewable energy sources and improving energy efficiency. "><span class="content">This goal aims to ensure that everyone has access to affordable, reliable, sustainable, and modern energy. It emphasizes increasing the use of renewable energy sources and improving energy efficiency.</span></button>
+        <button class="button button8" data-text="The aim is to promote sustainable economic growth and create decent job opportunities. This includes creating employment, providing opportunities for young people, and improving working conditions. "><span class="content">The aim is to promote sustainable economic growth and create decent job opportunities. This includes creating employment, providing opportunities for young people, and improving working conditions.</span></button>
+        <button class="button button9" data-text="This goal focuses on building resilient infrastructure, promoting sustainable industrialization, and fostering innovation. Sectoral transformation and modernization of industrial facilities are also associated with this target. "><span class="content">This goal focuses on building resilient infrastructure, promoting sustainable industrialization, and fostering innovation. Sectoral transformation and modernization of industrial facilities are also associated with this target.        </span></button>
+        <button class="button button10" data-text="The goal is to reduce inequalities between and within countries. It aims to improve socio-economic conditions, ensure equal opportunities, and eliminate discrimination. "><span class="content">The goal is to reduce inequalities between and within countries. It aims to improve socio-economic conditions, ensure equal opportunities, and eliminate discrimination.        </span></button>
+        <button class="button button11" data-text="The goal is to create sustainable settlements, increase safety in urban areas, and develop accessible transportation systems. It also emphasizes increasing green spaces and building environmentally friendly structures. "><span class="content">The goal is to create sustainable settlements, increase safety in urban areas, and develop accessible transportation systems. It also emphasizes increasing green spaces and building environmentally friendly structures.        </span></button>
+        <button class="button button12" data-text="This goal focuses on ensuring sustainable consumption and production patterns. Efficient use of resources, reduction of waste, and promotion of recycling practices are key elements of this goal. "><span class="content">This goal focuses on ensuring sustainable consumption and production patterns. Efficient use of resources, reduction of waste, and promotion of recycling practices are key elements of this goal.        </span></button>
+        <button class="button button13" data-text="This goal calls for urgent measures to combat climate change and raise awareness of the issue. It focuses on developing strategies to curb global warming and reducing carbon emissions. "><span class="content">This goal calls for urgent measures to combat climate change and raise awareness of the issue. It focuses on developing strategies to curb global warming and reducing carbon emissions.        </span></button>
+        <button class="button button14" data-text="The aim is to conserve and sustainably use the oceans, seas, and marine resources. It emphasizes reducing marine pollution, protecting marine biodiversity, and supporting sustainable fishing practices. "><span class="content">The aim is to conserve and sustainably use the oceans, seas, and marine resources. It emphasizes reducing marine pollution, protecting marine biodiversity, and supporting sustainable fishing practices.        </span></button>
+        <button class="button button15" data-text="The goal is to protect terrestrial ecosystems, end deforestation, and promote biodiversity. It focuses on conserving natural resources and promoting sustainable land use. "><span class="content">The goal is to protect terrestrial ecosystems, end deforestation, and promote biodiversity. It focuses on conserving natural resources and promoting sustainable land use.        </span></button>
+        <button class="button button16" data-text="This goal aims to promote peaceful and inclusive societies, ensure justice for all, and build strong institutions. Preventing violence, protecting human rights, and fostering participatory governance are essential components. "><span class="content">This goal aims to promote peaceful and inclusive societies, ensure justice for all, and build strong institutions. Preventing violence, protecting human rights, and fostering participatory governance are essential components.        </span></button>
+        <button class="button button17" data-text="The goal focuses on strengthening global partnerships for sustainable development. It emphasizes enhancing international cooperation, sharing resources, and ensuring the exchange of knowledge. "><span class="content">The goal focuses on strengthening global partnerships for sustainable development. It emphasizes enhancing international cooperation, sharing resources, and ensuring the exchange of knowledge.</span></button>
+   </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
